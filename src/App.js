@@ -35,6 +35,13 @@ import ProductList from "./component/Admin/ProductList.js";
 import NewProduct from "./component/Admin/NewProduct.js";
 import UpdateProduct from "./component/Admin/UpdateProduct.js";
 import OrderList from "./component/Admin/OrderList.js";
+import ProcessOrder from "./component/Admin/ProcessOrder.js";
+import UsersList from "./component/Admin/UsersList.js";
+import UpdateUser from "./component/Admin/UpdateUser.js";
+import ProductReviews from "./component/Admin/ProductReviews.js";
+import Contact from "./component/layout/Contact/Contact.js";
+import About from "./component/layout/About/About.js";
+import NotFound from "./component/layout/Not Found/NotFound.js";
 
 const App=()=>{
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -72,6 +79,9 @@ const App=()=>{
     <Route path="/products/:keyword" element={<Products/>} />
     <Route exact path="/search" element={<Search />} />
     <Route exact path="/login" element={<LoginSignUp/>} />
+    <Route exact path="/contact" element={<Contact/>} />
+
+    <Route exact path="/about" element={<About/>} />
      {isAuthenticated && <Route exact path="/account" element={<Profile/>}/>}
      {isAuthenticated &&<Route exact path="/me/update" element={<UpdateProfile/>} />}
      {isAuthenticated&& <Route
@@ -132,6 +142,39 @@ const App=()=>{
           path="/admin/orders"
           element={<OrderList/>}
         />:<Route exact path="/login"/>}
+
+{isAuthenticated?<Route
+        //  isAdmin={true}
+          exact
+          path="/admin/order/:id"
+          element={<ProcessOrder/>}
+        />:<Route exact path="/login"/>}
+
+{isAuthenticated?<Route
+        //  isAdmin={true}
+          exact
+          path="/admin/users"
+          element={<UsersList/>}
+        />:<Route exact path="/login"/>}
+
+{isAuthenticated?<Route
+        //  isAdmin={true}
+          exact
+          path="/admin/user/:id"
+          element={<UpdateUser/>}
+        />:<Route exact path="/login"/>}
+
+{isAuthenticated?<Route
+        //  isAdmin={true}
+          exact
+          path="/admin/reviews"
+          element={<ProductReviews/>}
+        />:<Route exact path="/login"/>}
+          <Route
+          element={
+            window.location.pathname === "/process/payment" ? null : NotFound
+          }
+        />
 
 
     </Routes>
