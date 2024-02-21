@@ -61,6 +61,7 @@ const App=()=>{
     store.dispatch(loadUser())
     getStripeApiKey()
   },[]);
+  //window.addEventListener("contextmenu", (e) => e.preventDefault());
   return(<>
   <BrowserRouter>
     <Header/>
